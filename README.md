@@ -19,8 +19,8 @@
 ## How to Build and Run
 
 ### 1. Clone the Repository
-git clone <management_service_repo_url>
-cd management-service
+- git clone https://github.com/Adewale103/management-service.git
+- cd management-service
 
 ### 2. Build the JAR
 mvn clean package
