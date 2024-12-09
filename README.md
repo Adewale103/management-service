@@ -42,4 +42,4 @@ Default database is H2. Update application.properties for another DB:
 - spring.datasource.url=jdbc:mysql://<db_url>
 - spring.datasource.username=<db_user>
 - spring.datasource.password=<db_password>
-# management-service
+
