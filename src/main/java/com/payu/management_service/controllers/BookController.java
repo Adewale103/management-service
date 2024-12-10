@@ -18,6 +18,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.Parameter;
 
+import javax.validation.Valid;
+
 
 @RestController
 @RequiredArgsConstructor
@@ -30,7 +32,7 @@ public class BookController {
     @PostMapping(value = "", produces = "application/json")
     @Operation(summary = "Create a new book", description = "Adds a new book to the database.")
     public ResponseEntity<BookDto> createBook(
-            @RequestBody BookRequest bookRequest) throws IOException {
+            @RequestBody @Valid BookRequest bookRequest) throws IOException {
         BookDto book = bookService.createBook(bookRequest);
         return new ResponseEntity<>(book, HttpStatus.CREATED);
     }
@@ -59,7 +61,7 @@ public class BookController {
     @ResponseStatus(HttpStatus.OK)
     public void updateBook(
             @Parameter(description = "The book ID") @RequestParam String bookId,
-            @RequestBody BookRequest bookRequest) throws IOException {
+            @RequestBody @Valid BookRequest bookRequest) throws IOException {
         long id = AppendableReferenceUtils.getIdFrom(bookId);
         bookService.updateBook(id, bookRequest);
     }

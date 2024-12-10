@@ -43,3 +43,5 @@ Default database is H2. Update application.properties for another DB:
 - spring.datasource.username=<db_user>
 - spring.datasource.password=<db_password>
 
+### 6. Improvements
+- Add security

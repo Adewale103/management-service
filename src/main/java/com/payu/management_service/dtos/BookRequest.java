@@ -5,9 +5,7 @@ package com.payu.management_service.dtos;
 import com.payu.management_service.enums.BookType;
 import lombok.*;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 
 
@@ -21,12 +19,12 @@ public class BookRequest {
     private String name;
     @NotBlank
     private String publishedDate;
-    @NotBlank
+    @Positive
     private int isbn;
-    @NotBlank
-    @Min(value = 1, message = "Price can not be less than 1")
+    @NotNull(message = "Price cannot be null")
+    @DecimalMin(value = "1.00", inclusive = true, message = "Price cannot be less than 1")
     private BigDecimal price;
-    @Pattern(regexp = "HARDCOVER|SOFTCOVER|EBOOK", message = "Book type must be either 'HARDCOVER', 'EBOOK' or 'SOFTCOVER'")
+    @NotNull(message = "Book type must not be null")
     private BookType bookType;
 
 }

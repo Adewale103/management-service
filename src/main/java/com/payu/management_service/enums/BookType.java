@@ -6,7 +6,6 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum BookType {
-    HARDCOVER("HARDCOVER"), SOFTCOVER("SOFTCOVER"), EBOOK("EBOOK");
+    HARDCOVER, SOFTCOVER, EBOOK;
 
-    private final String bookType;
 }
