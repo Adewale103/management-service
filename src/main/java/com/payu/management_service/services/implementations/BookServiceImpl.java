@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static com.payu.management_service.utils.Constants.ALREADY_EXIST;
 import static com.payu.management_service.utils.Constants.NOT_FOUND;
@@ -75,7 +76,7 @@ public class BookServiceImpl implements BookService {
         return pagedResponse;
     }
     private static List<BookDto> mapBookToBookDto(List<Book> books) {
-        return books.stream().map(BookDto::fromModel).toList();
+        return books.stream().map(BookDto::fromModel).collect(Collectors.toList());
     }
 
 

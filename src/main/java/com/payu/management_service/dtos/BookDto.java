@@ -11,9 +11,6 @@ import java.time.LocalDate;
 
 @Setter
 @Getter
-@ToString
-@NoArgsConstructor
-@AllArgsConstructor
 public class BookDto {
     private String id;
     private String name;
@@ -32,4 +29,5 @@ public class BookDto {
     public static BookDto toDto(Object o){
         return fromModel((Book) o);
     }
+
 }

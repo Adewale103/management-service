@@ -128,23 +128,23 @@ public class CriteriaConverter {
     private static Predicate asPredicate(CriteriaBuilder criteriaBuilder, Expression<?> attribute, Criteria criteria) {
         String condition = criteria.getCondition();
         Object value = criteria.getValue();
-        if(value == null) return criteria.nextPredicate(criteriaBuilder);
+        if (value == null) return criteria.nextPredicate(criteriaBuilder);
 
-        // cast class if an Enum/Date is provided
+        // Cast class if an Enum/Date is provided
         Class<?> classType = attribute.getJavaType();
         if (classType.isEnum()) {
             value = EnumUtils.toEnum(classType, value);
         } else if (classType == Date.class) {
             value = DateTimeUtils.fromMillis(String.valueOf(value));
-        } else if (classType == boolean.class || classType == Boolean.class){
+        } else if (classType == boolean.class || classType == Boolean.class) {
             value = Boolean.parseBoolean(String.valueOf(value));
         }
 
         switch (condition) {
-            case EQUAL -> {
+            case EQUAL:
                 return criteriaBuilder.equal(attribute, value);
-            }
-            case GREATER_THAN -> {
+
+            case GREATER_THAN:
                 if (classType == Date.class) {
                     return criteriaBuilder.greaterThan(attribute.as(Date.class), (Date) value);
                 } else if (classType == Long.class || classType == long.class) {
@@ -155,8 +155,8 @@ public class CriteriaConverter {
                     return criteriaBuilder.greaterThan(attribute.as(BigDecimal.class), parseBigDecimal(value));
                 }
                 return criteriaBuilder.greaterThan(attribute.as(String.class), String.valueOf(value));
-            }
-            case GREATER_THAN_INCLUSIVE -> {
+
+            case GREATER_THAN_INCLUSIVE:
                 if (classType == Date.class) {
                     return criteriaBuilder.greaterThanOrEqualTo(attribute.as(Date.class), (Date) value);
                 } else if (classType == Long.class || classType == long.class) {
@@ -167,8 +167,8 @@ public class CriteriaConverter {
                     return criteriaBuilder.greaterThanOrEqualTo(attribute.as(BigDecimal.class), parseBigDecimal(value));
                 }
                 return criteriaBuilder.greaterThanOrEqualTo(attribute.as(String.class), String.valueOf(value));
-            }
-            case LESSER_THAN -> {
+
+            case LESSER_THAN:
                 if (classType == Date.class) {
                     return criteriaBuilder.lessThan(attribute.as(Date.class), (Date) value);
                 } else if (classType == Long.class || classType == long.class) {
@@ -179,8 +179,8 @@ public class CriteriaConverter {
                     return criteriaBuilder.lessThan(attribute.as(BigDecimal.class), parseBigDecimal(value));
                 }
                 return criteriaBuilder.lessThan(attribute.as(String.class), String.valueOf(value));
-            }
-            case LESSER_THAN_INCLUSIVE -> {
+
+            case LESSER_THAN_INCLUSIVE:
                 if (classType == Date.class) {
                     return criteriaBuilder.lessThanOrEqualTo(attribute.as(Date.class), (Date) value);
                 } else if (classType == Long.class || classType == long.class) {
@@ -191,17 +191,16 @@ public class CriteriaConverter {
                     return criteriaBuilder.lessThanOrEqualTo(attribute.as(BigDecimal.class), parseBigDecimal(value));
                 }
                 return criteriaBuilder.lessThanOrEqualTo(attribute.as(String.class), String.valueOf(value));
-            }
-            case LIKE -> {
+
+            case LIKE:
                 return criteriaBuilder.like(criteriaBuilder.lower(attribute.as(String.class)),
                         "%" + String.valueOf(value).toLowerCase() + "%");
-            }
-            case NOT_EQUAL -> {
+
+            case NOT_EQUAL:
                 return criteriaBuilder.notEqual(attribute, value);
-            }
-            default -> {
+
+            default:
                 return criteria.nextPredicate(criteriaBuilder);
-            }
         }
     }
 

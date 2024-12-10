@@ -37,6 +37,6 @@ public class ObjectParser {
 
     @SneakyThrows
     public static String parseValue(String value){
-        return URLDecoder.decode(value, StandardCharsets.UTF_8);
+        return URLDecoder.decode(value, String.valueOf(StandardCharsets.UTF_8));
     }
 }

@@ -27,11 +27,15 @@ public class DateTimeUtils {
         if (i >= 11 && i <= 13) {
             return "th";
         }
-        return switch (i % 10) {
-            case 1 -> "st";
-            case 2 -> "nd";
-            case 3 -> "rd";
-            default -> "th";
-        };
+        switch (i % 10) {
+            case 1:
+                return "st";
+            case 2:
+                return "nd";
+            case 3:
+                return "rd";
+            default:
+                return "th";
+        }
     }
 }
